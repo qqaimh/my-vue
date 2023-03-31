@@ -5,6 +5,7 @@ const props = defineProps<{
   foo: string
   bar?: number
 }>()
+console.log(2222)
 </script>
 
 <template>
