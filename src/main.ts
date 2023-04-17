@@ -8,7 +8,18 @@ import './assets/main.css'
 
 const app = createApp(App)
 
-app.use(createPinia())
+
+// pinia
+const pinia = createPinia();
+// 因为状态管理使用的是setup的方式构建所以我们重写一个$reset并挂载到pinia中
+pinia.use(({ store }) => {
+  const initialState = JSON.parse(JSON.stringify(store.$state));
+  store.$reset = () => {
+    store.$patch(initialState);
+  }
+})
+
+app.use(pinia)
 app.use(router)
 console.log(1111, app)
 app.mount('#app')

@@ -2,8 +2,9 @@
 
   <div>
     Count: {{ state.count }}
+    Sore Count: {{ count }}
     <button @click="increment">increment</button>
-
+    <button @click="resetStore">resetStore</button>
     <div>
       <input type="checkbox" id="checkbox" v-model="checked" />
       <label for="checkbox">{{ checked }}</label>
