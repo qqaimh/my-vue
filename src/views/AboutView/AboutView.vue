@@ -44,11 +44,12 @@
 <style src="./AboutView.css"></style>
 
 <script lang="ts" setup>
-import { reactive, ref } from 'vue'
+import { reactive, ref, watch } from 'vue'
 import AboutItem from '../../components/AboutItem.vue'
 import vBackground from '../../directives/vBackground'
 import { storeToRefs } from 'pinia'
 import { useCounterStore } from '@/stores/counter';
+import { useDark, useTitle,useToggle } from '@vueuse/core'
 
 
 const state = reactive({ count: 0 })
@@ -90,6 +91,10 @@ store.$subscribe((mutation, state) => {
   console.log(992, mutation, state)
 })
 
+const title = useTitle('Set title')
+watch(count, () => {
+    title.value = count.value >3 ? '🌙 Good evening!' : '☀️ Good morning!'
+})
 
 
 
