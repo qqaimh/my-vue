@@ -9,3 +9,9 @@
     border: 1px solid green;
   }
 }
+
+#my-mouse {
+  width: 250px;
+  height: 250px;
+  border: 1px solid red;
+}

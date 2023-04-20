@@ -37,20 +37,31 @@
   <label for="mike">Mike</label>
 </div>
 <div v-background>111</div>
-<AboutItem />
+<div id="my-mouse">
+  <UseMouse v-slot="{ x, y }">
+  x: {{ x }}
+  y: {{ y }}
+</UseMouse>
+</div>
+<div>
+    <h1>姓名：{{boy.name}}</h1>
+    <h1>年龄：{{boy.news.age}}</h1>
+    <button @click="btn">修改name</button>
+    <button @click="btn2">修改age</button>
+  </div>
 </div>
 </template>
 
 <style src="./AboutView.css"></style>
 
 <script lang="ts" setup>
-import { reactive, ref, watch } from 'vue'
+import { computed, reactive, ref, watch, shallowReactive } from 'vue'
 import AboutItem from '../../components/AboutItem.vue'
 import vBackground from '../../directives/vBackground'
 import { storeToRefs } from 'pinia'
 import { useCounterStore } from '@/stores/counter';
-import { useDark, useTitle,useToggle } from '@vueuse/core'
-
+import { useDark, useTitle,useToggle, useMouse } from '@vueuse/core'
+import { UseMouse } from '@vueuse/components'
 
 const state = reactive({ count: 0 })
 const checkedNames = ref([])
@@ -96,6 +107,22 @@ watch(count, () => {
     title.value = count.value >3 ? '🌙 Good evening!' : '☀️ Good morning!'
 })
 
+const boy = shallowReactive({
+      name: "我是𝒆𝒅.",
+      news: {
+        birthday: "2012-10-14",
+        age: 10
+      }
+    });
+ 
+    const btn = () => {
+      boy.name = "𝒆𝒅.";
+    };
+ 
+    const btn2 = () => {
+      boy.news.age++;
+      console.log(boy.news)
+    };
 
 
 </script>
